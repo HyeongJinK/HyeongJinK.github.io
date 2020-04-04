@@ -4,23 +4,23 @@ description: >- # this means to ignore newlines until "baseurl:"
   devlopr-jekyll is a Jekyll Theme Built For Developers
 
 url: "" # the base hostname & protocol for your site, e.g. https://example.github.io
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "https://napasun.github.io" # the subpath of your site, e.g. /blog
 
 urls:
     - text: About Me
       url: /about
     - text: Blog
       url: /blog
-    - text: Gallery
-      url: /gallery
-    - text: Shop
-      url : /shop
-    - text: Contact Me
-      url : /contact
+    # - text: Gallery
+    #   url: /gallery
+    # - text: Shop
+    #   url : /shop
+    # - text: Contact Me
+    #   url : /contact
     - text: Styleguide
       url: /styleguide
-    - text: Get Started
-      url: /get-started
+    # - text: Get Started
+    #   url: /get-started
 
 # Edit these details
 
@@ -78,16 +78,16 @@ dribbble_username: johndoe
 flickr_username: johndoe
 
 #for comments using disqus
-disqus_shortname: sujay-kundu
+disqus_shortname: napasun
 
 # wakatime username (coding activity)
-wakatime_username: sujaykundu777
+wakatime_username: napasun
 
 # mailchimp embedded form url (newsletter):
 mailchimp_form_url: https://sujaykundu.us10.list-manage.com/subscribe/post?u=50bab1c85eae24ecfb0f68361&amp;id=3a2dd721d0
 
 # formspree (contact form)
-formspree_email: johndoe@gmail.com
+formspree_email: wkzkfmxk12@naver.com
 
 # syntax highlighter
 markdown: kramdown
@@ -95,7 +95,7 @@ highlighter: rouge
 permalink: pretty
 
 # google analytics
-google_analytics: UA-46783401-10
+google_analytics: UA-90343705-2
 
 # Choose what to show ( can be true or false)
 show_author_work_experiences: true
