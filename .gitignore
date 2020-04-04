@@ -1,8 +1,8 @@
-*.gem
-.bundle
-.sass-cache
-_site
-.jekyll-cache
+_site/
+.sass-cache/
 .jekyll-metadata
-vendor
-build/
+_pdf
+.DS_Store
+.idea
+vendor/
+.bundle/

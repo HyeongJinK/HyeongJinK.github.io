@@ -1,57 +1,39 @@
 ---
 layout: default
 ---
+<article class="post" itemscope itemtype="https://schema.org/BlogPosting">
 
-<!-- Blog Post Breadcrumbs -->
-{%- include blog_post_breadcrumb.html -%}
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+        <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time> {% if page.author %}<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">/ {{ page.author }}</span></span>{% endif %}{% if page.tags != null %}/
+            {% assign projectTags = site.data.tags.allowed-tags %}
+            {% for tag in page.tags %}
+            {% if projectTags contains tag %}
+            <a href="{{ "tag_" | append: tag | append: ".html"}}">{{tag}}</a>{% unless forloop.last %}, {% endunless%}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
 
-<div class="row" id="blog-post-container">
-
-        <div class="col-lg-8 offset-md-2">
-
-           {%- include blog_post_article.html -%}
-
-           {%- include blog_post_comments.html -%}
-        </div>
+        </p>
 
 
+    </header>
 
-</div> <!-- End of row-->
+    <div class="post-content" itemprop="articleBody">
 
-<div class="row">
- <div class="col-md-4">
-    <div class="card">
-        <div class="card-header"> About </div>
-        <div class="card-body">
-            <!-- Your Bio -->
-            <p class="author_bio"> {{ site.author_bio }}</p>
+        {% if page.summary %}
+        <div class="summary">{{page.summary}}</div>
+        {% endif %}
 
-            {%- include github_star_button.html -%}
-        </div>
+        {{ content }}
     </div>
- </div>
- <div class="col-md-4">
-    <div class="card">
-        <div class="card-header">Categories </div>
-        <div class="card-body text-dark">
-            {%- include blog_categories.html -%}
-        </div>
-    </div>
-   </div>
-    <div class="col-md-4">
-    <div class="card">
-        <div class="card-header">Useful Links </div>
-        <div class="card-body text-dark">
-            {% for i in site.urls %}
-               <li >
-                 <a href="{{ site.url}}{{site.baseurl}}{{ i.url }}">{{ i.text }}</a>
-              </li>
-           {% endfor %}
-        </div>
-    </div>
-   </div>
-
-</div>
 
 
 
+</article>
+
+{% include commento.html %}
+
+{{site.data.alerts.hr_shaded}}
+
+{% include footer.html %}
