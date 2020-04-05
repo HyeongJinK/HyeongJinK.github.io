@@ -4,7 +4,7 @@ topnav:
 - title: Topnav
   items:
     - title: GitHub
-      external_url: https://github.com/tomjoht/documentation-theme-jekyll
+      external_url: https://github.com/napasun
     - title: News
       url: /news
 
@@ -24,6 +24,10 @@ topnav_dropdowns:
           external_url: http://idratherbewriting.com/category-jekyll/
     - title: Products
       folderitems:
+        - title: docker
+          url: /docker_index.html
+        - title: kubernetes
+          url: /kubernetes_index.html
         - title: Jekyll Documentation Theme
           url: /mydoc_introduction.html
         - title: Product 1
