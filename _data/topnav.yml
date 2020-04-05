@@ -5,7 +5,7 @@ topnav:
   items:
     - title: GitHub
       external_url: https://github.com/napasun
-    - title: News
+    - title: Posts
       url: /news
 
 #Topnav dropdowns
