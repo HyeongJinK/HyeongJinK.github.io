@@ -5,7 +5,7 @@ entries:
   levels: one
   folders:
 
-  - title: Products
+  - title: Post
     output: web
     folderitems:
     - title: Post
