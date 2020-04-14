@@ -104,7 +104,6 @@ sidebars:
 - mydoc_sidebar
 - product1_sidebar
 - product2_sidebar
-- other
 - docker_sidebar
 - kubernetes_sidebar
 
