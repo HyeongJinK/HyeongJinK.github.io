@@ -4,7 +4,7 @@ topnav:
 - title: Topnav
   items:
     - title: GitHub
-      external_url: https://github.com/napasun
+      external_url: https://github.com/HyeongJinK
     - title: Posts
       url: /news
 
@@ -34,3 +34,5 @@ topnav_dropdowns:
           url: /p1_landing_page.html
         - title: Product 2
           url: /p2_landing_page.html
+        - title: Java
+          url: /java_index.html

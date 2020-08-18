@@ -3,10 +3,10 @@ repository: tomjoht/documentation-theme-jekyll
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
 
-topnav_title: 난파선 블로그
+topnav_title: 문서정리
 # this appears on the top navigation bar next to the home button
 
-site_title: 난파선 프로그래밍 블로그
+site_title: 문서정리 사이트
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
 company_name: Your company
@@ -106,6 +106,7 @@ sidebars:
 - product2_sidebar
 - docker_sidebar
 - kubernetes_sidebar
+- java_sidebar
 
 description: "Intended as a documentation theme based on Jekyll for technical writers documenting software and other technical products, this theme has all the elements you would need to handle multiple products with both multi-level sidebar navigation, tags, and other documentation features."
 # the description is used in the feed.xml file
