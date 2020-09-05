@@ -25,6 +25,6 @@ entries:
       output: web
 
     - title: 동시성 1_1
-      url: /Java9_Concurrency_Cookbook_Second_Edition/1_1.html
+      url: /Java9_Concurrency_Cookbook_Second_Edition_1_1.html
       output: web, pdf
     
