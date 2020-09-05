@@ -1,0 +1,25 @@
+entries:
+- title: Sidebar
+  product: React
+  version: 1.0
+  folders:
+
+  - title:
+    output: pdf
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /titlepage.html
+      output: pdf
+      type: frontmatter
+    - title:
+      url: /tocpage.html
+      output: pdf
+      type: frontmatter
+
+  - title: 메인
+    output: web, pdf
+    folderitems:
+    - title: 메인
+      url: /react_index.html
+      output: web
