@@ -1,23 +1,23 @@
 entries:
 - title: Sidebar
-    product: Java
-    version: 1.0
-    folders:
+  product: Java
+  version: 1.0
+  folders:
 
-    - title:
+  - title:
     output: pdf
     type: frontmatter
     folderitems:
     - title:
-        url: /titlepage.html
-        output: pdf
-        type: frontmatter
+      url: /titlepage.html
+      output: pdf
+      type: frontmatter
     - title:
-        url: /tocpage.html
-        output: pdf
-        type: frontmatter
+      url: /tocpage.html
+      output: pdf
+      type: frontmatter
 
-    - title: 메인
+  - title: 메인
     output: web, pdf
     folderitems:
     - title: 메인
