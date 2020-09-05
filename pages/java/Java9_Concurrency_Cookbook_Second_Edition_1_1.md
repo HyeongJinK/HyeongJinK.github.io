@@ -3,7 +3,7 @@ title: Java Main
 keywords: Java
 sidebar: java_sidebar
 toc: true
-permalink: Java9_Concurrency_Cookbook_Second_Edition/1_1.html
+permalink: Java9_Concurrency_Cookbook_Second_Edition_1_1.html
 folder: Java
 ---
 
