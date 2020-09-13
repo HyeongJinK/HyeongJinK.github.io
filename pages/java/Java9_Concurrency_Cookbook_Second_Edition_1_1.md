@@ -7,7 +7,7 @@ permalink: Java9_Concurrency_Cookbook_Second_Edition_1_1.html
 folder: Java
 ---
 
-#쓰레드 관리(Thread Management)
+# 쓰레드 관리(Thread Management)
 
 이 장에서는 다음과 같은 주제를 다룰 것입니다.
 

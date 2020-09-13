@@ -1,0 +1,31 @@
+---
+    spring.profiles: local
+    
+    app.config-server: localhost
+    
+    spring:
+      application.name: company
+      cloud.config:
+        failFast: true
+        retry:
+          initialInterval: 3000
+          multiplier: 1.3
+          maxInterval: 10000
+          maxAttempts: 20
+        uri: http://${app.config-server}:8888
+    ---
+    spring.profiles: swam-test
+    
+    app.config-server: 13.125.122.99
+    
+    spring:
+      application.name: company
+      cloud.config:
+        failFast: true
+        retry:
+          initialInterval: 3000
+          multiplier: 1.3
+          maxInterval: 10000
+          maxAttempts: 20
+        uri: http://${app.config-server}:8888
+    
