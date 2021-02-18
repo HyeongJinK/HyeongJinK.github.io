@@ -1,72 +1,100 @@
-<p align="right">
-    <a href="https://badge.fury.io/rb/just-the-docs"><img src="https://badge.fury.io/rb/just-the-docs.svg" alt="Gem version"></a> <a href="https://github.com/pmarsceill/just-the-docs/actions?query=workflow%3A%22Master+branch+CI%22"><img src="https://github.com/pmarsceill/just-the-docs/workflows/Master%20branch%20CI/badge.svg" alt="Build status"></a>
-</p>
-<br><br>
-<p align="center">
-    <h1 align="center">Just the Docs</h1>
-    <p align="center">A modern, highly customizable, and responsive Jekyll theme for documentation with built-in search.<br>Easily hosted on GitHub Pages with few dependencies.</p>
-    <p align="center"><strong><a href="https://pmarsceill.github.io/just-the-docs/">See it in action!</a></strong></p>
-    <br><br><br>
-</p>
+# jekyll-rtd-theme
 
-![jtd](https://user-images.githubusercontent.com/896475/47384541-89053c80-d6d5-11e8-98dc-dba16e192de9.gif)
+![CI](https://github.com/rundocs/jekyll-rtd-theme/workflows/CI/badge.svg?branch=develop)
+![jsDelivr](https://data.jsdelivr.com/v1/package/gh/rundocs/jekyll-rtd-theme/badge)
 
-## Installation
+Just another documentation theme compatible with GitHub Pages
 
-Add this line to your Jekyll site's Gemfile:
+## What it does?
 
-```ruby
-gem "just-the-docs"
+This theme is inspired by [sphinx-rtd-theme](https://github.com/readthedocs/sphinx_rtd_theme) and refactored with:
+
+- [@primer/css](https://github.com/primer/css)
+- [github-pages](https://github.com/github/pages-gem) ([dependency versions](https://pages.github.com/versions/))
+
+## Quick start
+
+```yml
+remote_theme: rundocs/jekyll-rtd-theme
 ```
 
-And add this line to your Jekyll site's `_config.yml`:
-
-```yaml
-theme: just-the-docs
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install just-the-docs
-
-Alternatively, you can run it inside Docker while developing your site
-
-    $ docker-compose up
+You can [generate](https://github.com/rundocs/starter-slim/generate) with the same files and folders from [rundocs/starter-slim](https://github.com/rundocs/starter-slim/)
 
 ## Usage
 
-[View the documentation](https://pmarsceill.github.io/just-the-docs/) for usage information.
+Documentation that can guide how to create with Github pages, please refer to [rundocs.io](https://rundocs.io) for details
 
-## Contributing
+## Features
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/pmarsceill/just-the-docs. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+- Shortcodes (Toasts card, mermaid)
+- Pages Plugins (emoji, gist, avatar, mentions)
+- Auto generate sidebar
+- [Attribute List Definitions](https://kramdown.gettalong.org/syntax.html#attribute-list-definitions) (Primer/css utilities, Font Awesome 4)
+- Service worker (caches)
+- SEO (404, robots.txt, sitemap.xml)
+- Canonical Link (Open Graph, Twitter Card, Schema data)
 
-### Submitting code changes:
+## Options
 
-- Open a [Pull Request](https://github.com/pmarsceill/just-the-docs/pulls)
-- Ensure all CI tests pass
-- Await code review
-- Bump the version number in `just-the-docs.gemspec` and `package.json` according to [semantic versioning](https://semver.org/).
+| name          | default value        | description       |
+| ------------- | -------------------- | ----------------- |
+| `title`       | repo name            |                   |
+| `description` | repo description     |                   |
+| `url`         | user domain or cname |                   |
+| `baseurl`     | repo name            |                   |
+| `lang`        | `en`                 |                   |
+| `direction`   | `auto`               | `ltr` or `rtl`    |
+| `highlighter` | `rouge`              | Cannot be changed |
 
-### Design and development principles of this theme:
+```yml
+# folders sort
+readme_index:
+  with_frontmatter: true
 
-1. As few dependencies as possible
-2. No build script needed
-3. First class mobile experience
-4. Make the content shine
+meta:
+  key1: value1
+  key2: value2
+  .
+  .
+  .
 
-## Development
+google:
+  gtag:
+  adsense:
 
-To set up your environment to develop this theme, run `bundle install`.
+mathjax: # this will prased to json, default: {}
 
-Your theme is set up just like a normal Jekyll site! To test your theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme. Add pages, documents, data, etc. like normal to test your theme's contents. As you make modifications to your theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
+mermaid:
+  custom:     # mermaid link
+  initialize: # this will prased to json, default: {}
 
-When the theme is released, only the files in `_layouts`, `_includes`, and `_sass` tracked with Git will be released.
+scss:   # also _includes/extra/styles.scss
+script: # also _includes/extra/script.js
 
-## License
+translate:
+  # shortcodes
+  danger:
+  note:
+  tip:
+  warning:
+  # 404
+  not_found:
+  # copyright
+  revision:
+  # search
+  searching:
+  search:
+  search_docs:
+  search_results:
+  search_results_found: # the "#" in this translate will replaced with results size!
+  search_results_not_found:
 
-The theme is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+plugins:
+  - jemoji
+  - jekyll-avatar
+  - jekyll-mentions
+```
+
+## The license
+
+The theme is available as open source under the terms of the MIT License
