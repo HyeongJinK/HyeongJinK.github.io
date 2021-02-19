@@ -1,3 +1,7 @@
+---
+sort: 8
+---
+
 ## 7. 문자열을 int, long, float 또는 double로 변환  
 
 ```java  

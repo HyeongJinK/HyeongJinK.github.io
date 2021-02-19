@@ -1,3 +1,9 @@
+---
+sort: 42
+---
+
+# 42. 
+
 Checking null references and throwing NullPointerException with customized messages can be accomplished using the following code (this code does these four times, twice in the constructor and twice in the assignDriver() method):
 
 ```java

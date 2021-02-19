@@ -1,4 +1,8 @@
-# 33 BigInteger를 기본 유형으로 변환
+---
+sort: 34
+---
+
+# 33. BigInteger를 기본 유형으로 변환
 
 
 ```java

@@ -1,4 +1,8 @@
-# long을 int로 변환
+---
+sort: 35
+---
+
+# 34. long을 int로 변환
 
 
 ```java
