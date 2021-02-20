@@ -1,5 +1,5 @@
 ---
-sort: 8
+sort: 7
 ---
 
 ## 7. 문자열을 int, long, float 또는 double로 변환  
