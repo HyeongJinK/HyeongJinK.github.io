@@ -1,5 +1,5 @@
 ---
-sort: 34
+sort: 33
 ---
 
 # 33. BigInteger를 기본 유형으로 변환

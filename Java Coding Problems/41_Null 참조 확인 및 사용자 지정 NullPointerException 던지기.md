@@ -1,8 +1,8 @@
 ---
-sort: 42
+sort: 41
 ---
 
-# 42. 
+# 41. Null 참조 확인 및 사용자 지정 NullPointerException 던지기
 
 Checking null references and throwing NullPointerException with customized messages can be accomplished using the following code (this code does these four times, twice in the constructor and twice in the assignDriver() method):
 

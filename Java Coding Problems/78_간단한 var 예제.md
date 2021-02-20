@@ -1,8 +1,8 @@
 ---
-sort: 79
+sort: 78
 ---
 
-# 간단한 var 예제
+# 78. 간단한 var 예제
 
 버전 10부터 Java는 var유형 이라고도하는 JEP 286 또는 Java LVTI와 함께 제공됩니다 .
 
