@@ -2,6 +2,6 @@
 sort: 1
 ---
 
-# Java Coding Problems
+# Thread Management
 
 {% include list.liquid all=true %}

@@ -1,7 +1,7 @@
 ---
-sort: 1
+sort: 2
 ---
 
-# Java Coding Problems
+# Basic Thread Synchronization
 
 {% include list.liquid all=true %}
