@@ -107,126 +107,89 @@ public void run() {
 }
 ```
 
-그런 다음 `OptimisticReader`작업을 구현하십시오 . 클래스 `OptimisticReader`클래스는 `Runnable`인터페이스를 구현합니다 . 여기에는 `Position`명명 `position`된 `StampledLock`객체 와 명명 된 객체라는 두 가지 속성이 있습니다 `lock`. 클래스의 생성자에서 초기화됩니다.
+그런 다음 `OptimisticReader` 태스크를 구현하십시오. `OptimisticReader` 클래스는 `Runnable` 인터페이스를 구현합니다. 두 가지 속성, 즉 `position`이라는 `Position` 개체와 `lock`이라는 `StampledLock` 개체가 있습니다. 클래스 생성자에서 초기화됩니다.
 
-부
-
-```
-        public class OptimisticReader implements Runnable { 
-          private final Position position; 
-          private final StampedLock lock; 
-          public OptimisticReader (Position position, StampedLock lock) { 
-            this.position=position; 
-            this.lock=lock; 
-          }
+```java
+public class OptimisticReader implements Runnable { 
+  private final Position position; 
+  private final StampedLock lock; 
+  public OptimisticReader (Position position, StampedLock lock) { 
+    this.position=position; 
+    this.lock=lock; 
+  }
 ```
 
-이제 `run()`메소드를 구현하십시오 . 먼저 `tryOptimisticRead()`방법을 사용하여 낙관적 읽기 모드에서 잠금 스탬프를 얻습니다 . 그런 다음 루프 `100`시간을 반복하십시오 . 루프에서 `validate()`메소드를 사용하여 데이터에 액세스 할 수 있는지 검증하십시오 . 이 메소드가 true를 리턴하면 콘솔에서 위치 오브젝트의 값을 쓰십시오. 그렇지 않으면 콘솔에 메시지를 작성하고 `tryOptimisticRead()`메소드를 다시 사용하여 다른 스탬프를 받으십시오. 그런 다음 스레드를 `200`밀리 초 동안 일시 중단하십시오 .
+이제 `run()` 메서드를 구현합니다. 먼저 `tryOptimisticRead()` 메서드를 사용하여 낙관적 읽기 모드에서 잠금 스탬프를 가져옵니다. 그런 다음 루프를 `100`번 반복합니다. 루프에서 `validate()` 메서드를 사용하여 데이터에 액세스 할 수 있는지 확인합니다. 이 메서드가 true를 반환하면 콘솔에 위치 개체의 값을 작성합니다. 그렇지 않으면 콘솔에 메시지를 쓰고 `tryOptimisticRead()` 메서드를 다시 사용하여 다른 스탬프를 가져옵니다. 그런 다음 스레드를 `200`밀리 초 동안 일시 중단합니다.
 
-부
-
+```java
+@Override 
+public void run() { 
+  long stamp; 
+  for (int i=0; i<100; i++) { 
+    try { 
+      stamp=lock.tryOptimisticRead(); 
+      int x = position.getX(); 
+      int y = position.getY(); 
+      if (lock.validate(stamp)) { 
+        System.out.printf("OptmisticReader: %d - (%d,%d)\n",
+                          stamp,x, y); 
+      } else { 
+        System.out.printf("OptmisticReader: %d - Not Free\n",
+                          stamp); 
+      } 
+      TimeUnit.MILLISECONDS.sleep(200); 
+    } catch (InterruptedException e) { 
+      e.printStackTrace(); 
+    } 
+  } 
+}
 ```
-        @Override 
-        public void run() { 
-          long stamp; 
-          for (int i=0; i<100; i++) { 
-            try { 
-              stamp=lock.tryOptimisticRead(); 
-              int x = position.getX(); 
-              int y = position.getY(); 
-              if (lock.validate(stamp)) { 
-                System.out.printf("OptmisticReader: %d - (%d,%d)\n",
-                                  stamp,x, y); 
-              } else { 
-                System.out.printf("OptmisticReader: %d - Not Free\n",
-                                  stamp); 
-              } 
-              TimeUnit.MILLISECONDS.sleep(200); 
-            } catch (InterruptedException e) { 
-              e.printStackTrace(); 
-            } 
-          } 
-        }
-```
+마지막으로 `main()` 메서드로 `Main` 클래스를 구현합니다. `Position` 및 `StampedLock` 개체를 만들고 각 작업에 대해 하나씩 3개의 스레드를 만들고 스레드를 시작하고 완료 될 때까지 기다립니다.
 
-마지막으로 메소드를 사용 하여 `Main`클래스를 구현하십시오 `main()`. 만들기 `Position`및 `StampedLock`개체, 세 개의 스레드 생성 - 각 작업에 대해 한 - 스레드를 시작하고, 자신의 마무리 기다립니다
-
-부
-
-```
-        public class Main { 
-          public static void main(String[] args) { 
-            Position position=new Position(); 
-            StampedLock lock=new StampedLock(); 
-            Thread threadWriter=new Thread(new Writer(position,lock)); 
-            Thread threadReader=new Thread(new Reader(position, lock)); 
-            Thread threadOptReader=new Thread(new OptimisticReader
-                                               (position, lock)); 
-            threadWriter.start(); 
-            threadReader.start(); 
-            threadOptReader.start(); 
-            try { 
-              threadWriter.join(); 
-              threadReader.join(); 
-              threadOptReader.join(); 
-            } catch (InterruptedException e) { 
-              e.printStackTrace(); 
-            } 
-          } 
-        }
+```java
+public class Main { 
+  public static void main(String[] args) { 
+    Position position=new Position(); 
+    StampedLock lock=new StampedLock(); 
+    Thread threadWriter=new Thread(new Writer(position,lock)); 
+    Thread threadReader=new Thread(new Reader(position, lock)); 
+    Thread threadOptReader=new Thread(new OptimisticReader
+                                        (position, lock)); 
+    threadWriter.start(); 
+    threadReader.start(); 
+    threadOptReader.start(); 
+    try { 
+      threadWriter.join(); 
+      threadReader.join(); 
+      threadOptReader.join(); 
+    } catch (InterruptedException e) { 
+      e.printStackTrace(); 
+    } 
+  } 
+}
 ```
 
 # **작동 원리 ...**
 
-이 예에서는 스탬프 잠금과 함께 사용할 수있는 세 가지 모드를 테스트했습니다. 이 `Writer`작업 에서는 `writeLock()`쓰기 모드에서 잠금을 획득하는 메소드를 사용하여 잠금을 얻습니다. 이 `Reader`작업 에서는 `readLock()`메서드를 사용하여 잠금을 얻습니다 (읽기 모드에서 잠금을 획득 함). 마지막으로 `OptimisticRead`작업에서 먼저 사용 `tryOptimisticRead()`하고 `validate()`데이터를 액세스 할 수 있는지 여부를 확인 하는 방법을 사용합니다 .
+이 예에서는 스탬프 잠금과 함께 사용할 수 있는 세 가지 모드를 테스트했습니다. `Writer`태스크에서 `writeLock()` 메서드(쓰기 모드에서 잠금을 획득)로 잠금을 얻습니다. `Reader`테스크에서 `readLock()` 메서드를 사용하여 잠금을 얻습니다(읽기 모드에서 잠금을 획득 함). 마지막으로 `OptimisticRead` 작업에서 먼저 `tryOptimisticRead()`를 사용한 다음 `validate()` 메서드를 사용하여 데이터에 액세스 할 수 있는지 여부를 확인합니다.
 
-처음 두 방법은 잠금을 제어 할 수 있으면 잠금을 얻을 때까지 기다립니다. 이 `tryOptimisticRead()`메서드는 항상 값을 반환합니다. 그것은 될 것입니다 `0`우리가 잠금에서 값의 다른 사용할 수없는 경우 `0` 우리가 그것을 사용할 수 있는지를. 이 경우 항상 `validate()`데이터에 액세스 할 수 있는지 여부를 확인 하는 방법을 사용해야합니다 .
+처음 두 방법은 잠금을 제어 할 수 있는 경우 잠금을 얻을 때까지 기다립니다. `tryOptimisticRead()` 메서드는 항상 값을 반환합니다. 잠금을 사용할 수 없는 경우 0이고 사용할 수 있는 경우 0과 다른 값이 됩니다. 이 경우 데이터에 실제로 액세스 할 수 있는지 확인하기 위해 항상 `validate()` 메서드를 사용해야 합니다.
 
-다음 스크린 샷은 프로그램 실행 결과의 일부를 보여줍니다.
+다음 스크린 샷은 프로그램 실행 출력의 일부를 보여줍니다.
 
 ![](asserts/Untitled.png)
 
-`Writer`작업이 잠금을 제어 하는 동안 값에 액세스 `Reader`하거나 `OptimisticReader`액세스 할 수 없습니다 . `Reader`작업은 일시 중단됩니다 `readLock()`에있는 동안, 방법 `OptimisticReader`의 호출 `validate()`메소드가 리턴 `false`과 호출 `tryOptimisticRead()`방법을 반환 `0`잠금이 다른 스레드에서 쓰기 모드로 제어되는 것을 나타냅니다. `Writertask`잠금 이 해제 되면 작업 `Reader`과 `OptimisticReader`작업 모두 공유 객체의 값에 액세스 할 수 있습니다.
+`Writer` 태스크가 잠금을 제어하는 ​​동안 `Reader`와 `OptimisticReader`는 값에 액세스 할 수 없습니다. `Reader` 테스크는 `readLock()` 메서드에서 일시 중단되고 `OptimisticReader`에서는 `validate()` 메서드에 대한 호출이 `false`를 반환하고 `tryOptimisticRead()` 메서드에 대한 호출이 `0`을 반환하여 잠금이 다른 스레드에 의해 쓰기 모드로 제어됨을 나타냅니다. `Writertask`가 잠금을 해제하면 `Reader` 및 `OptimisticReader` 작업 모두 공유 개체의 값에 액세스 할 수 있습니다.
 
 # **더있다...**
 
 이 `StampedLock`클래스에는 알아야 할 다른 메소드가 있습니다.
 
-- `tryReadLock()tryReadLock(long time, TimeUnit unit)stamp != 0`
-
-    and
-
-    :이 메소드는 읽기 모드에서 잠금을 획득하려고 시도합니다. 그렇지 않은 경우 첫 번째 버전이 즉시 반환되고 두 번째 버전은 매개 변수에 지정된 시간 동안 기다립니다. 이 메소드는 또한 확인해야 할 스탬프를 반환합니다 (
-
-    ).
-
-- `tryWriteLock()tryWriteLock(long time, TimeUnit unit)stamp != 0`
-
-    and
-
-    :이 메소드는 쓰기 모드에서 잠금을 획득하려고 시도합니다. 그렇지 않은 경우 첫 번째 버전이 즉시 반환되고 두 번째 버전은 매개 변수에 지정된 시간 동안 기다립니다. 이 메소드는 또한 확인해야 할 스탬프를 반환합니다 (
-
-    ).
-
-- `isReadLocked()isWriteLocked()`
-
-    및
-
-    : 잠금이 현재 읽기 또는 쓰기 모드로 유지되는 경우 이러한 메소드가 리턴됩니다.
-
-- `tryConvertToReadLock(long stamp)tryConvertToWriteLock(long stamp)tryConvertToOptimisticRead(long stamp)0`
-
-    ,,
-
-    및
-
-    :이 메소드는 매개 변수로 전달 된 스탬프를 메소드 이름에 표시된 모드로 변환하려고합니다. 가능하면 새 도장을 반환합니다. 그렇지 않으면을 반환
-
-    합니다.
-
-- `unlock(long stamp)`
-
-    : 해당 잠금 모드가 해제됩니다.
+- `tryReadLock()` and `tryReadLock(long time, TimeUnit unit)` :이 메소드는 읽기 모드에서 잠금을 획득하려고 시도합니다. 그렇지 않은 경우 첫 번째 버전이 즉시 반환되고 두 번째 버전은 매개 변수에 지정된 시간 동안 기다립니다. 이 메소드는 또한 확인해야 할 스탬프를 반환합니다.(`stamp != 0`)
+- `tryWriteLock()` and `tryWriteLock(long time, TimeUnit unit)` :이 메소드는 쓰기 모드에서 잠금을 획득하려고 시도합니다. 그렇지 않은 경우 첫 번째 버전이 즉시 반환되고 두 번째 버전은 매개 변수에 지정된 시간 동안 기다립니다. 이 메소드는 또한 확인해야 할 스탬프를 반환합니다.(`stamp != 0`)
+- `isReadLocked()` 및 `isWriteLocked()` : 잠금이 현재 읽기 또는 쓰기 모드로 유지되는 경우 이러한 메소드가 리턴됩니다.
+- `tryConvertToReadLock(long stamp)`, `tryConvertToWriteLock(long stamp)`, `tryConvertToOptimisticRead(long stamp)` :이 메소드는 매개 변수로 전달된 스탬프를 메소드 이름에 표시된 모드로 변환하려고합니다. 가능하면 새 스탬프을 반환합니다. 그렇지 않으면 `0`을 반환합니다.
+- `unlock(long stamp)`: 해당 잠금 모드가 해제됩니다.
 
 # **또한보십시오**
 
