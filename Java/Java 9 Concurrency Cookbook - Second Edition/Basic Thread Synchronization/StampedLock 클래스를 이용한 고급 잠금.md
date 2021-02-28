@@ -190,9 +190,3 @@ public class Main {
 - `isReadLocked()` 및 `isWriteLocked()` : 잠금이 현재 읽기 또는 쓰기 모드로 유지되는 경우 이러한 메소드가 리턴됩니다.
 - `tryConvertToReadLock(long stamp)`, `tryConvertToWriteLock(long stamp)`, `tryConvertToOptimisticRead(long stamp)` :이 메소드는 매개 변수로 전달된 스탬프를 메소드 이름에 표시된 모드로 변환하려고합니다. 가능하면 새 스탬프을 반환합니다. 그렇지 않으면 `0`을 반환합니다.
 - `unlock(long stamp)`: 해당 잠금 모드가 해제됩니다.
-
-# **또한보십시오**
-
-- ***잠금으로 코드 블록을 동기화***
-
-    본 장의 레시피
