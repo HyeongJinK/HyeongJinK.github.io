@@ -1,7 +1,7 @@
 ---
-sort: 2
+sort: 1
 ---
 
-# Java 9 Concurrency Cookbook - Second Edition
+# Java
 
 {% include list.liquid all=true %}
