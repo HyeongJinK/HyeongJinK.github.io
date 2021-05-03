@@ -1,3 +1,9 @@
+---
+sort: 7
+---
+
+# The content of element type "collection" must match
+
 ```
 The content of element type "collection" must match "(constructor?,id*,result*,association*,collection*,discriminator?)".
 ```

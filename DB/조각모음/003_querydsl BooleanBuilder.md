@@ -2,6 +2,8 @@
 sort: 3
 ---
 
+# querydsl BooleanBuilder
+
 ```java
 BooleanBuilder builder = new BooleanBuilder();
 
