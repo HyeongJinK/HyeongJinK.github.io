@@ -1,7 +1,7 @@
 ---
-sort: 30
+sort: 1
 ---
 
-# DB
+# Memo
 
 {% include list.liquid all=true %}

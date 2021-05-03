@@ -1,7 +1,7 @@
 ---
-sort: 30
+sort: 10
 ---
 
-# DB
+# React
 
 {% include list.liquid all=true %}

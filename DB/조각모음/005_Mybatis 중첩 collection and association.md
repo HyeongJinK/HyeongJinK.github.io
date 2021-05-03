@@ -1,3 +1,9 @@
+---
+sort: 5
+---
+
+# Mybatis 중첩 collection and association
+
 ```xml
     <resultMap id="stationAll" type="com.neibus.subway.dto.all.SubwayAllDto">
         <id property="cityId" column="city_id" />
