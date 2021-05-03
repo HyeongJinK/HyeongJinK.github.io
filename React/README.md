@@ -1,7 +1,7 @@
 ---
-sort: 1
+sort: 10
 ---
 
-# Memo
+# React
 
 {% include list.liquid all=true %}
